@@ -4,12 +4,16 @@
             <form (ngSubmit)="signIn(signInForm)" #signInForm="ngForm">
                 <div class="form-group">
                     <label for="email">email</label>
-                    <input type="text" class="form-control" ngModel name="email">
+                    <input type="text" class="form-control"  #email="ngModel" id="email" required ngModel name="email">
                 </div>
+
+                <p class="alert alert-info" *ngIf="email.invalid && email.touched">plz enter </p>
+           
                 <div class="form-group">
                     <label for="password">password</label>
-                    <input type="text" class="form-control"  ngModel  name="password">
+                    <input type="text" class="form-control" required #password="ngModel" ngModel  name="password">
                 </div>
+                <p *ngIf="password.touched && password.invalid" class="text-danger">plz enter valind password</p>
                 <div class="form-group">
                     <select name="selected" id="selected"  ngModel class="form-control">
                         <option value="book">books</option>
@@ -27,6 +31,9 @@
                 <div class="text-right">
                     <button class="btn btn-primary">
                         submit
+                    </button>
+                    <button class="btn btn-warning ml-2" type="button" (click)="onUpdate(signInForm)">
+                        edit
                     </button>
                 </div>
             </form>
